@@ -1,3 +1,10 @@
+## [2.0.4](https://github.com/arabold/docs-mcp-server/compare/v2.0.3...v2.0.4) (2026-02-17)
+
+
+### Bug Fixes
+
+* handle playwright route already handled race condition error ([4669029](https://github.com/arabold/docs-mcp-server/commit/4669029a8fb3a5ff6b37cd0308579e0df2df76e1)), closes [#332](https://github.com/arabold/docs-mcp-server/issues/332)
+
 ## [2.0.3](https://github.com/arabold/docs-mcp-server/compare/v2.0.2...v2.0.3) (2026-02-10)
 
 
