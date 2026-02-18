@@ -133,6 +133,19 @@ Segment content into semantic chunks while preserving document structure:
 - Handles oversized content while preserving document structure
 - Ensures optimal chunk sizes for embedding generation
 
+Chunk sizes are controlled by three character-based thresholds:
+
+| Setting | Role |
+|:--------|:-----|
+| `minChunkSize` | Floor for merging -- chunks below this are combined with neighbors |
+| `preferredChunkSize` | Soft target -- the optimizer splits when merging would exceed this |
+| `maxChunkSize` | Hard ceiling -- no chunk body will exceed this value |
+
+All sizes are measured in **characters** (`string.length`), not tokens. Before embedding,
+a metadata header (page title, URL, section path) is prepended to each chunk, so the total
+text sent to the embedding model is slightly larger than the chunk body. The actual token
+count depends on the embedding model's tokenizer.
+
 ## Content Processing Flow
 
 ```mermaid

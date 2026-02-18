@@ -1150,12 +1150,15 @@ export class DocumentStore {
           return `${header}${chunk.content}`;
         });
 
-        // Validate chunk sizes before creating embeddings
-        for (let i = 0; i < texts.length; i++) {
-          const textSize = texts[i].length;
-          if (textSize > this.splitterMaxChunkSize) {
+        // Validate chunk body sizes before creating embeddings.
+        // Note: We compare the chunk body (without the metadata header) against maxChunkSize,
+        // because the splitter's size budget applies to the content body only. The metadata
+        // header (title, URL, path) is expected overhead added after splitting.
+        for (let i = 0; i < chunks.length; i++) {
+          const bodySize = chunks[i].content.length;
+          if (bodySize > this.splitterMaxChunkSize) {
             logger.warn(
-              `⚠️  Chunk ${i + 1}/${texts.length} exceeds max size: ${textSize} > ${this.splitterMaxChunkSize} chars (URL: ${url})`,
+              `⚠️  Chunk ${i + 1}/${chunks.length} body exceeds max size: ${bodySize} > ${this.splitterMaxChunkSize} chars (URL: ${url})`,
             );
           }
         }
