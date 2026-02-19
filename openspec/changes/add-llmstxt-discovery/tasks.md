@@ -24,10 +24,6 @@
 
 ## 6. Integration Tests
 
-- [ ] 5.1 Add tests to `src/scraper/strategies/WebScraperStrategy.test.ts` covering: llms.txt probe at subpath, probe fallback to root, probe failure (404), URL seeding with scope filtering, `.md` URL preference success and fallback, deduplication of llms.txt URLs with original URL, llms.txt exclusion from indexing
-
-## 6. Integration Tests
-
 - [ ] 6.1 Add tests to `src/scraper/strategies/WebScraperStrategy.test.ts` covering: llms.txt probe at subpath, probe fallback to root, probe failure (404), URL seeding with scope filtering, `.md` URL preference success and fallback, deduplication of llms.txt URLs with original URL, llms.txt exclusion from indexing
 - [ ] 6.2 Add tests for Markdown content negotiation: verify `Accept: text/markdown` header is sent on all web requests, verify `Content-Type: text/markdown` responses bypass HTML conversion, verify `Content-Type: text/html` responses are processed normally
 
@@ -38,7 +34,13 @@
 - [ ] 7.3 Add debug-level log when `.md` URL preference succeeds or falls back
 - [ ] 7.4 Add debug-level log when server responds with `Content-Type: text/markdown` via content negotiation
 
-## 8. Validation
+## 8. Documentation
 
-- [ ] 8.1 Run `npm run lint` and `npm run typecheck` to ensure no regressions
-- [ ] 8.2 Run `npm test` to confirm all existing and new tests pass
+- [ ] 8.1 Update `README.md` to document automatic llms.txt discovery: explain that the scraper probes for `/llms.txt` before BFS crawling, uses discovered URLs as seeds, and prefers `.md` URL variants for llms.txt pages. Note that this is fully automatic with no configuration required.
+- [ ] 8.2 Update `README.md` to document Markdown content negotiation: explain that the scraper sends `Accept: text/markdown` on all web requests, and servers supporting this (e.g., Cloudflare's Markdown for Agents) will return Markdown directly, bypassing HTML-to-Markdown conversion for higher quality output.
+- [ ] 8.3 Update `ARCHITECTURE.md` if the llms.txt probe or content negotiation introduces meaningful changes to the scraping pipeline flow or data model (e.g., the `fromLlmsTxt` flag on `QueueItem`, the new parser utility).
+
+## 9. Validation
+
+- [ ] 9.1 Run `npm run lint` and `npm run typecheck` to ensure no regressions
+- [ ] 9.2 Run `npm test` to confirm all existing and new tests pass

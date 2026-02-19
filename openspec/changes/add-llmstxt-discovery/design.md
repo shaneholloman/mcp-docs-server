@@ -83,7 +83,7 @@ Refresh operations (`isRefresh: true`) use a pre-populated queue from the databa
   - Mitigation: All URLs are filtered through the existing `shouldProcessUrl()` which enforces scope + include/exclude patterns. Out-of-scope URLs are silently dropped.
 
 - **`.md` URL returning wrong content**: A server may serve different content at `url.md` than at `url`.
-  - Mitigation: Content-type validation + size sanity check. The `.md` preference is best-effort, not critical.
+  - Mitigation: Content-type validation. The `.md` preference is best-effort, not critical.
 
 ### Decision 7: Accept: text/markdown content negotiation on all web fetches
 
